@@ -55,6 +55,7 @@ const Home = () => {
             try {
                 const results = await model.classify(imageRef.current);
                 setResults(results);
+                console.log(results)
                 setAnimalName(results[0].className);
             } catch (error) {
                 console.error('Error during classification:', error);
