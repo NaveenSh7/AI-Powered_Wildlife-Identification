@@ -50,7 +50,7 @@ const Home = () => {
     };
 
     const identify = async () => {
-        textInputRef.current.value = '';
+        // textInputRef.current.value = '';
         if (model && imageRef.current) {
             try {
                 const results = await model.classify(imageRef.current);
@@ -130,8 +130,8 @@ const Home = () => {
                 <button className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600" onClick={triggerUpload}>
                     Upload Image
                 </button>
-                <span className="text-gray-600 text-sm">OR</span>
-                <input type="text" placeholder="Paste image URL" ref={textInputRef} onChange={handleOnChange} className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-500" />
+                {/* <span className="text-gray-600 text-sm">OR</span>
+                <input type="text" placeholder="Paste image URL" ref={textInputRef} onChange={handleOnChange} className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-500" /> */}
             </div>
 
             <div className="mainWrapper flex flex-col items-center">
