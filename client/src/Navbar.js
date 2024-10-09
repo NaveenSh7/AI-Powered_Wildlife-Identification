@@ -5,7 +5,7 @@ const Navbar = ()=>{
     return(
     <>
     
-<nav class="bg-[#6A9C89] shadow shadow-gray-300 w-100 px-8 md:px-auto ">
+<nav class="bg-[#396b58] shadow shadow-gray-300 w-100 px-8 md:px-auto ">
 	<div class="md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
 		
 		<div class="text-white md:order-1">
@@ -19,11 +19,11 @@ const Navbar = ()=>{
 		<div class="text-gray-500 order-3 w-full md:w-auto md:order-2">
 			<ul class="flex font-semibold justify-between">
               
-				<li class="md:px-4 md:py-2 text-white "><a href="#">Dashboard</a></li>
-				<li class="md:px-4 md:py-2 hover:text-white text-[#16423C]"><a href="#">Search</a></li>
-				<li class="md:px-4 md:py-2 hover:text-white text-[#16423C]"><a href="#">Explore</a></li>
-				<li class="md:px-4 md:py-2 hover:text-white text-[#16423C]"><a href="#">About</a></li>
-				<li class="md:px-4 md:py-2 hover:text-white text-[#16423C]"><a href="#">Contact</a></li>
+				<li class="md:px-4 md:py-2 text-white bold"><a href="#">Dashboard</a></li>
+				<li class="md:px-4 md:py-2 hover:text-white text-[#000000] bold"><a href="#">Search</a></li>
+				<li class="md:px-4 md:py-2 hover:text-white text-[#000000] bold"><a href="#">Explore</a></li>
+				<li class="md:px-4 md:py-2 hover:text-white text-[#000000] bold"><a href="#">About</a></li>
+				<li class="md:px-4 md:py-2 hover:text-white text-[#000000] bold"><a href="#">Contact</a></li>
 			</ul>
 		</div>
 		<div class="order-2 md:order-3">

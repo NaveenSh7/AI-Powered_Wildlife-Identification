@@ -3,6 +3,7 @@ import axios from 'axios';
 import * as mobilenet from "@tensorflow-models/mobilenet";
 import * as tf from '@tensorflow/tfjs';
 import './Loader.css'
+import { useAuth0 } from "@auth0/auth0-react";
 const Home = () => {
     const [isModelLoading, setIsModelLoading] = useState(false);
     const [model, setModel] = useState(null);
@@ -11,10 +12,13 @@ const Home = () => {
     const [history, setHistory] = useState([]);
     const [animalName, setAnimalName] = useState('');
     const [animalInfo, setAnimalInfo] = useState('');
+    const [selectedFile, setSelectedFile] = useState(null);
 
     const imageRef = useRef();
     const textInputRef = useRef();
     const fileInputRef = useRef();
+
+    const { loginWithRedirect, isAuthenticated,isLoading,loginWithPopup,logout,user } = useAuth0();
 
     const setTensorFlowBackend = async () => {
         try {
@@ -44,6 +48,7 @@ const Home = () => {
         if (files.length > 0) {
             const url = URL.createObjectURL(files[0]);
             setImageURL(url);
+            setSelectedFile(files[0]);
         } else {
             setImageURL(null);
         }
@@ -90,13 +95,13 @@ const Home = () => {
             .map(word => word.charAt(0).toUpperCase() + word.slice(1))
             .join(' ');
     };
-
+//wiki api
     const fetchAnimalInfo = async () => {
         if (animalName === '') {
             return (<p>No animal</p>);
         }
         const namesArray = animalName.split(',').map(name => name.trim());
-        const title = namesArray[1];
+        const title = namesArray[0];
 
         const url = `https://en.wikipedia.org/w/api.php?action=query&titles=${title}&prop=extracts|pageimages&exintro&explaintext&format=json&origin=*`;
         const response = await axios.get(url);
@@ -118,7 +123,32 @@ const Home = () => {
         );
     }
     
-    
+   // Saving img function on the frontend
+   const SaveImg = async () => {
+    console.log("Image Upload Initiated");
+
+    if (!selectedFile) {
+        console.log("No file selected");
+        return;
+    }
+
+    try {
+        const formData = new FormData();
+        formData.append("image", selectedFile); // Pass the selected file
+        formData.append("UserEmail", "naveen@gmail.com"); // User's email
+
+        const response = await axios.put("http://localhost:5000/SaveImg", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+
+        alert("Saved succesfully")
+    } catch (err) {
+        console.log("Failed to save image from frontend", err);
+    }
+};
+
     
 
     return (
@@ -155,7 +185,7 @@ const Home = () => {
                         </div>
                     )}
                 </div>
-                <button className="relative h-10 w-36 overflow-hidden border border-green-600 text-green-600 shadow-2xl transition-all duration-200 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:m-auto before:h-0 before:w-0 before:rounded-sm before:bg-green-600 before:duration-300 before:ease-out hover:text-white hover:shadow-green-600 hover:before:h-40 hover:before:w-40 hover:before:opacity-80" onClick={identify} disabled={isModelLoading || !imageURL}>
+                <button className="relative cursor-pointer h-10 w-36 overflow-hidden border border-green-600 text-green-600 shadow-2xl transition-all duration-200 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:m-auto before:h-0 before:w-0 before:rounded-sm before:bg-green-600 before:duration-300 before:ease-out hover:text-white hover:shadow-green-600 hover:before:h-40 hover:before:w-40 hover:before:opacity-80" onClick={identify} disabled={isModelLoading || !imageURL}>
                 <span class="relative z-10">Identify !</span>
                 </button>
             </div>
@@ -164,8 +194,15 @@ const Home = () => {
                 <p className="font-bold">Name:</p> 
                 {animalName}
             </div>
-            <button className="relative h-10 w-36 overflow-hidden border border-green-600 text-indigo-600 shadow-2xl transition-all duration-200 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:m-auto before:h-0 before:w-0 before:rounded-sm before:bg-indigo-600 before:duration-300 before:ease-out hover:text-white hover:shadow-indigo-600 hover:before:h-40 hover:before:w-40 hover:before:opacity-80" onClick={() => { fetchAnimalInfo(animalName) }} disabled={isModelLoading || !animalName} >
+            <button className="relative cursor-pointer h-10 w-36 overflow-hidden border border-green-600 text-indigo-600 shadow-2xl transition-all duration-200 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:m-auto before:h-0 before:w-0 before:rounded-sm before:bg-indigo-600 before:duration-300 before:ease-out hover:text-white hover:shadow-indigo-600 hover:before:h-40 hover:before:w-40 hover:before:opacity-80" onClick={() => { fetchAnimalInfo(animalName) }} disabled={isModelLoading || !animalName} >
             <span class="relative z-10"> Get Info</span>
+              
+            </button>
+
+            <button className="relative cursor-pointer mt-4 h-10 w-36 overflow-hidden border border-green-600 text-indigo-600 shadow-2xl transition-all duration-200 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:m-auto before:h-0 before:w-0 before:rounded-sm before:bg-indigo-600 before:duration-300 before:ease-out hover:text-white hover:shadow-indigo-600 hover:before:h-40 hover:before:w-40 hover:before:opacity-80" onClick={()=>{SaveImg()}} >
+            <span class="relative z-10"> Save</span>
+
+           
               
             </button>
 

@@ -5,6 +5,8 @@ import Home from './Home.js'
 import Login from './Login.js';
 import Navbar from './Navbar.js'
 import Footer from './Footer.js'
+import Sidebar from './Sidebar.js';
+import Slider from './Slider.js';
 function App() {
     
 
@@ -14,10 +16,13 @@ function App() {
     return (
         <div>
      <Navbar/>
-     
+     <Slider/>
+     <Sidebar/>
+    
      <Routes>
 
         <Route exact path='/' element={ <Home/>}/>
+       
         <Route exact path='/Login' element={ <Login/>}/>
 
 
