@@ -31,53 +31,6 @@ app.get ( "/" , (req,res)=>{
     res.send( '<h1>Hiii tutu</h1>');
 } )
 
-// OpenAI-API
-
-// Paisa  Nhi hei  bhaiii 🥲
-
-// const openai = new OpenAI({ apiKey: OPEN_AI_KEY });
-
-
-// app.post("/openAI", async (req,res)=>{
-
-//     const { animal } = req.body;
-
-//   if (!animal) {
-//     return res.status(400).json({ error: 'Please provide an animal name.' });
-//   }
-//   const prompt = `Provide the Natural Habitat, Conservation Status, and Approximate Population for ${animal} in JSON format, like this:
-// {
-//   "Natural Habitat": "",
-//   "Conservation Status": "",
-//   "Approximate Population": ""
-// }`;
-
-
-// try {
-//     const response = await openai.chat.completions.create({
-//       model: 'gpt-3.5-turbo',
-//       messages: [{ role: 'user', content: prompt }],
-//       max_tokens: 60,
-//       temperature: 0.7,
-//     });
-
-
-//     let info = response.data.choices[0].text.trim();
-
-//     // Attempt to parse the info string as JSON
-//     try {
-//       info = JSON.parse(info); 
-//     } catch (error) {
-//       console.error('Failed to parse JSON:', error);
-//     }
-    
-//     res.json({ info : info });
-
-//   } catch (error) {
-//     console.error('Error fetching data from OpenAI API:', error);
-//     res.status(500).json({ error: 'Failed to fetch animal information.' });
-//   }
-// })
 
 
 // storing user info
@@ -198,3 +151,62 @@ app.listen(PORT, () => {
     console.log("SERVER STARTED ");
   });
   
+
+
+
+
+
+
+
+
+
+
+
+
+  // OpenAI-API
+
+// Paisa  Nhi hei  bhaiii 🥲
+
+// const openai = new OpenAI({ apiKey: OPEN_AI_KEY });
+
+
+// app.post("/openAI", async (req,res)=>{
+
+//     const { animal } = req.body;
+
+//   if (!animal) {
+//     return res.status(400).json({ error: 'Please provide an animal name.' });
+//   }
+//   const prompt = `Provide the Natural Habitat, Conservation Status, and Approximate Population for ${animal} in JSON format, like this:
+// {
+//   "Natural Habitat": "",
+//   "Conservation Status": "",
+//   "Approximate Population": ""
+// }`;
+
+
+// try {
+//     const response = await openai.chat.completions.create({
+//       model: 'gpt-3.5-turbo',
+//       messages: [{ role: 'user', content: prompt }],
+//       max_tokens: 60,
+//       temperature: 0.7,
+//     });
+
+
+//     let info = response.data.choices[0].text.trim();
+
+//     // Attempt to parse the info string as JSON
+//     try {
+//       info = JSON.parse(info); 
+//     } catch (error) {
+//       console.error('Failed to parse JSON:', error);
+//     }
+    
+//     res.json({ info : info });
+
+//   } catch (error) {
+//     console.error('Error fetching data from OpenAI API:', error);
+//     res.status(500).json({ error: 'Failed to fetch animal information.' });
+//   }
+// })

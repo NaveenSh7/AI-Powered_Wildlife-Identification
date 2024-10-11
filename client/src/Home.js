@@ -4,6 +4,8 @@ import * as mobilenet from "@tensorflow-models/mobilenet";
 import * as tf from '@tensorflow/tfjs';
 import './Loader.css'
 import { useAuth0 } from "@auth0/auth0-react";
+import Sidebar from './Sidebar.js';
+import Slider from './Slider.js';
 const Home = () => {
     const [isModelLoading, setIsModelLoading] = useState(false);
     const [model, setModel] = useState(null);
@@ -13,12 +15,14 @@ const Home = () => {
     const [animalName, setAnimalName] = useState('');
     const [animalInfo, setAnimalInfo] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
-
+    const [isSave , setisSave] = useState(false);
     const imageRef = useRef();
     const textInputRef = useRef();
     const fileInputRef = useRef();
 
-    const { loginWithRedirect, isAuthenticated,isLoading,loginWithPopup,logout,user } = useAuth0();
+    const {  isAuthenticated,isLoading,user } = useAuth0();
+    const PORT = 5000; 
+
 
     const setTensorFlowBackend = async () => {
         try {
@@ -62,6 +66,7 @@ const Home = () => {
                 setResults(results);
                 console.log(results)
                 setAnimalName(results[0].className);
+                IncrSearch();
             } catch (error) {
                 console.error('Error during classification:', error);
             }
@@ -97,18 +102,36 @@ const Home = () => {
     };
 //wiki api
     const fetchAnimalInfo = async () => {
+        setAnimalInfo('')
         if (animalName === '') {
             return (<p>No animal</p>);
         }
         const namesArray = animalName.split(',').map(name => name.trim());
-        const title = namesArray[0];
+        
+        namesArray.map( async(val,key)=>{
+            const title = val;
+            const url = `https://en.wikipedia.org/w/api.php?action=query&titles=${title}&prop=extracts|pageimages&exintro&explaintext&format=json&origin=*`;
+            const response = await axios.get(url);
+            const page = response.data.query.pages;
+            const pageId = Object.keys(page)[0];
+            if(page[pageId].extract !="")
+            {
+                setAnimalInfo(page[pageId].extract);
+                return;
+                        }
 
-        const url = `https://en.wikipedia.org/w/api.php?action=query&titles=${title}&prop=extracts|pageimages&exintro&explaintext&format=json&origin=*`;
-        const response = await axios.get(url);
 
-        const page = response.data.query.pages;
-        const pageId = Object.keys(page)[0];
-        setAnimalInfo(page[pageId].extract);
+        })
+        if(animalInfo==='')
+        {setAnimalInfo("couldnt predict properly please upload image again by cropping or with different angle else submit a report")}
+        // const title = namesArray[0];
+           
+        // const url = `https://en.wikipedia.org/w/api.php?action=query&titles=${title}&prop=extracts|pageimages&exintro&explaintext&format=json&origin=*`;
+        // const response = await axios.get(url);
+        // const page = response.data.query.pages;
+        // const pageId = Object.keys(page)[0];
+        
+        // setAnimalInfo(page[pageId].extract);
     };
 
     if (isModelLoading) {
@@ -125,33 +148,50 @@ const Home = () => {
     
    // Saving img function on the frontend
    const SaveImg = async () => {
-    console.log("Image Upload Initiated");
+   
 
     if (!selectedFile) {
         console.log("No file selected");
         return;
     }
-
+    if(!isAuthenticated)
+        {
+            alert("Please Login to Save ur searches");
+            return;
+        }
+     setisSave(true);
     try {
         const formData = new FormData();
         formData.append("image", selectedFile); // Pass the selected file
-        formData.append("UserEmail", "naveen@gmail.com"); // User's email
+        formData.append("UserEmail", user.email); // User's email
 
-        const response = await axios.put("http://localhost:5000/SaveImg", formData, {
+        const response = await axios.put(`http://localhost:${PORT}/SaveImg`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             },
         });
-
+       setisSave(false)
         alert("Saved succesfully")
     } catch (err) {
         console.log("Failed to save image from frontend", err);
     }
 };
+//incrementings
 
+const IncrSearch = () =>{
+    try {
+        axios.put(`http://localhost:${PORT}/IncSearch`,{
+
+        })
+    } catch (err) {
+        console.log("Couldnt incr search" , err);
+        
+    }
+}
     
 
     return (
+        
         <div className="App flex flex-col items-center bg-[#E9EFEC] p-8 min-h-screen">
             <h1 className="text-4xl font-bold text-gray-800 mb-8">AI-Powered Wildlife Identification</h1>
 
@@ -199,12 +239,19 @@ const Home = () => {
               
             </button>
 
-            <button className="relative cursor-pointer mt-4 h-10 w-36 overflow-hidden border border-green-600 text-indigo-600 shadow-2xl transition-all duration-200 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:m-auto before:h-0 before:w-0 before:rounded-sm before:bg-indigo-600 before:duration-300 before:ease-out hover:text-white hover:shadow-indigo-600 hover:before:h-40 hover:before:w-40 hover:before:opacity-80" onClick={()=>{SaveImg()}} >
-            <span class="relative z-10"> Save</span>
+        <div>
+        {
+            !isSave ? (<button className="relative cursor-pointer mt-4 h-10 w-36 overflow-hidden border border-green-600 text-indigo-600 shadow-2xl transition-all duration-200 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:m-auto before:h-0 before:w-0 before:rounded-sm before:bg-indigo-600 before:duration-300 before:ease-out hover:text-white hover:shadow-indigo-600 hover:before:h-40 hover:before:w-40 hover:before:opacity-80" onClick={()=>{SaveImg()}} >
+            <span class="relative z-10"
+            > Save</span>  </button>) : (<button className=" relative cursor-pointer mt-4 h-10 w-36 overflow-hidden border border-green-600 text-indigo-600 shadow-2xl transition-all duration-200 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:m-auto before:h-0 before:w-0 before:rounded-sm before:bg-indigo-600 before:duration-300 before:ease-out hover:text-white hover:shadow-indigo-600 hover:before:h-40 hover:before:w-40 hover:before:opacity-80"  >
+            <span class="relative z-10"
+            >Saving...</span>  </button>)
+          }  
+            </div>  
 
            
               
-            </button>
+          
 
             {animalInfo && (
                 <div className="animalInfo mt-6 bg-white p-4 rounded-md shadow-md">
