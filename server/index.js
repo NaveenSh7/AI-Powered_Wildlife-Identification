@@ -65,17 +65,21 @@ app.post ("/SaveUser" , async (req,res)=>{
 
 
 // fetching user info
+app.get("/GetUser", async (req, res) => {
+    const { UserEmail } = req.query; // Extract UserEmail from query parameters
 
-app.get( "/GetUser", async (req,res)=>{
- 
     try {
-        const data = await UserModel.find({});
-        res.json({ success: true, msg: "server is getting", data1: data });
+        const data = await UserModel.findOne({ UserEmail });
+        if (!data) {
+            return res.status(404).json({ success: false, msg: "User not found" });
+        }
+        res.json({ success: true, data1: data });
     } catch (err) {
         console.error('Error fetching data:', err);
         res.status(500).send("Error fetching data");
     }
-} )
+});
+
 
 // fetching Statistics
 
@@ -113,7 +117,7 @@ const upload = multer({ dest: 'uploads/' }); // Set 'uploads/' as the temporary 
 // Saving img to cloud and updating user
 app.put("/SaveImg", upload.single('image'), async (req, res) => {
     
-    const { UserEmail } = req.body;
+    const { UserEmail , Name } = req.body;
     const image = req.file.path; // This is the uploaded image file path
     
     try {
@@ -123,7 +127,7 @@ app.put("/SaveImg", upload.single('image'), async (req, res) => {
 
         const user = await UserModel.findOneAndUpdate(
             { UserEmail: UserEmail },
-            { $push: { Saved: result.secure_url } }, // Save the uploaded image URL
+            { $push: { Saved: { Url: result.secure_url, Name: Name } } }, // Save the pair of strings
             { new: true } // Return the updated user
         );
 

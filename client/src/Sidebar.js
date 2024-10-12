@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const Sidebar = () => {
   // State to track the selected option
-  const [selected, setSelected] = useState('profile');
+  const [selected, setSelected] = useState('');
 
   return (
     <div className="fixed top-96">
@@ -12,7 +12,7 @@ const Sidebar = () => {
       >
              {/* Settings Link */}
              <a
-          href="#settings"
+          href="/"
           onClick={() => setSelected('settings')}
           className={`flex aspect-square min-h-[32px] w-16 flex-col items-center justify-center gap-1 rounded-md p-1.5 ${
             selected === 'settings'
@@ -67,7 +67,7 @@ const Sidebar = () => {
    
         {/* Profile Link */}
         <a
-          href="#profile"
+          href="/profile"
           onClick={() => setSelected('profile')}
           className={`flex aspect-square min-h-[32px] w-16 flex-col items-center justify-center gap-1 rounded-md p-1.5 ${
             selected === 'profile'

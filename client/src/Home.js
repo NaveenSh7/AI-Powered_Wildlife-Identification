@@ -134,17 +134,17 @@ const Home = () => {
         // setAnimalInfo(page[pageId].extract);
     };
 
-    if (isModelLoading) {
-        return (
-            <div className=" h-96 w-full flex justify-center items-center mb-16 mt-16 ">
-                <div className="flex flex-col items-center">
-                    {/* Adjusted loader size */}
-                    <div className="loader w-24 h-64 mb-4"></div> 
-                    <div className="text-2xl font-semibold">Loading . . . .</div>
-                </div>
-            </div>
-        );
-    }
+    // if (isModelLoading) {
+    //     return (
+    //         <div className=" h-96 w-full flex justify-center items-center mb-16 mt-16 ">
+    //             <div className="flex flex-col items-center">
+    //                 {/* Adjusted loader size */}
+    //                 <div className="loader w-24 h-64 mb-4"></div> 
+    //                 <div className="text-2xl font-semibold">Loading . . . .</div>
+    //             </div>
+    //         </div>
+    //     );
+    // }
     
    // Saving img function on the frontend
    const SaveImg = async () => {
@@ -164,6 +164,7 @@ const Home = () => {
         const formData = new FormData();
         formData.append("image", selectedFile); // Pass the selected file
         formData.append("UserEmail", user.email); // User's email
+        formData.append("Name" , animalName);
 
         const response = await axios.put(`http://localhost:${PORT}/SaveImg`, formData, {
             headers: {
@@ -196,19 +197,28 @@ const IncrSearch = () =>{
             <h1 className="text-4xl font-bold text-gray-800 mb-8">AI-Powered Wildlife Identification</h1>
 
             <div className="inputHolder flex flex-col items-center mb-8 space-y-4">
-                <input type="file" accept="image/*" capture="camera" className="hidden" onChange={uploadImage} ref={fileInputRef} />
-                <button className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600" onClick={triggerUpload}>
-                    Upload Image
-                </button>
+                
+               
+    <label class="w-64 flex flex-col items-center  py-6text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue bg-green-500 text-white py-2 px-4  hover:bg-green-600">
+        <svg class="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+        </svg>
+        <a class="mt-2 text-base leading-normal "
+        onClick={triggerUpload}
+        > Upload Image</a>
+        <input type="file" accept="image/*" capture="camera" className="hidden" onChange={uploadImage} ref={fileInputRef} />
+        
+    </label>
+
                 {/* <span className="text-gray-600 text-sm">OR</span>
                 <input type="text" placeholder="Paste image URL" ref={textInputRef} onChange={handleOnChange} className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-500" /> */}
             </div>
 
             <div className="mainWrapper flex flex-col items-center">
                 <div className="mainContent">
-                    <div className="imageHolder mb-4">
+                    <div className="imageHolder mb-4 flex justify-center">
                         {imageURL && (
-                            <img src={imageURL} alt="Upload Preview" ref={imageRef} className="w-56 h-56 rounded-md shadow-lg" />
+                            <img src={imageURL} alt="Upload Preview" ref={imageRef} className="w-1/3 h-64 rounded-md shadow-lg" />
                         )}
                     </div>
                     {results.length > 0 && (
@@ -264,3 +274,12 @@ const IncrSearch = () =>{
 };
 
 export default Home;
+
+
+
+
+
+{/* <input type="file" accept="image/*" capture="camera" className="hidden" onChange={uploadImage} ref={fileInputRef} />
+                <button className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600" onClick={triggerUpload}>
+                    Upload Image
+                </button> */}
