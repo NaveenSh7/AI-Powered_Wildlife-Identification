@@ -49,7 +49,7 @@ const Navbar = ()=>{
 			</ul>
 		</div>
 		<div class="order-2 md:order-3">
-			<div class="px-4 py-2 bg-white hover:bg-white text-black rounded-xl flex items-center gap-2">
+			<div class="px-4 py-2 bg-white hover:bg-[#1a2822] hover:text-white text-black rounded-xl flex items-center gap-2 cursor-pointer">
 
                
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -60,11 +60,14 @@ const Navbar = ()=>{
                   <button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
                             Log Out
                           </button>
+						  
                       ) : (
                     <button onClick={Loginfun}>
                          Log In
                    </button>
 )}
+
+
             </div>
 		</div>
 	</div>

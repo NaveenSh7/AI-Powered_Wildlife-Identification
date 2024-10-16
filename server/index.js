@@ -6,7 +6,8 @@ app.use(express.json());
 app.use(cors({ origin: 'http://localhost:3000' }));
 const { OpenAI } = require('openai');
 //env
-const mongoURI = "mongodb+srv://naveensharalayya:qhGfWNl95h1yyVty@cluster0.eg6nx.mongodb.net/test";
+require('dotenv').config();
+const mongoURI = process.env.mongoURI;
 
 //schemas
 const PORT = 5000;
@@ -18,7 +19,8 @@ const cloudinary = require('./Coudinary');
 
 
 //connecting to Db
-mongoose.connect(mongoURI, {
+
+mongoose.connect(  mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -30,6 +32,7 @@ app.use(cors());
 app.get ( "/" , (req,res)=>{
     res.send( '<h1>Hiii tutu</h1>');
 } )
+
 
 
 

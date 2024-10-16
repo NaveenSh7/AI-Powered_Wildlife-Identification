@@ -17,5 +17,6 @@ const UserSchema = new mongoose.Schema({
 });
 
 // this adds data to collection users
+
 const UserModel = mongoose.model('users', UserSchema);
 module.exports = UserModel;

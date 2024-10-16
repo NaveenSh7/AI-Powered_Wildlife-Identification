@@ -22,3 +22,25 @@
   @keyframes l12 {
     100% {clip-path: inset(0 -30px 0 0)}
   }
+  @keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+.typewriter {
+    overflow: hidden; /* Ensures the text is hidden when not fully typed */
+    white-space: nowrap; /* Prevents text from wrapping */
+    border-right: 3px solid green; /* Cursor effect */
+    animation: typing 4s steps(30, end), blink 0.75s step-end infinite;
+}
+
+/* Optional: Blinking effect for the cursor */
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
