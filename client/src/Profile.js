@@ -27,9 +27,18 @@ useEffect(() => {
 }, [isAuthenticated]);
 
  
-  if (isLoading ) {
-    return <div>Loading ...</div>;
-  }
+if (isLoading) {
+  return (
+      <div className=" h-96 w-full flex justify-center items-center mb-16 mt-16 ">
+          <div className="flex flex-col items-center">
+              {/* Adjusted loader size */}
+              <div className="loader w-24 h-64 mb-4"></div> 
+              <div className="text-2xl font-semibold">Loading . . . .</div>
+          </div>
+      </div>
+  );
+}
+
   if (!isAuthenticated) {
     return <div>Login first</div>;
   }

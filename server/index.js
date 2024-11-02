@@ -146,7 +146,33 @@ app.put("/SaveImg", upload.single('image'), async (req, res) => {
 });
 
 
+//reports
+app.put("/ReportImg", upload.single('image'), async (req, res) => {
+    
+    const { UserEmail , Name, Data } = req.body;
+    const image = req.file.path; // This is the uploaded image file path
+    
+    try {
+        const result = await cloudinary.uploader.upload(image, {
+            folder: "AI_WILD",
+        });
 
+        const user = await UserModel.findOneAndUpdate(
+            { UserEmail: UserEmail },
+            { $push: { Reports: { Url: result.secure_url, Name: Name, Data : Data } } }, // Save the pair of strings
+            { new: true } // Return the updated user
+        );
+
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        res.status(200).json({ success: true, message: "report saved", user });
+    } catch (err) {
+        console.log("Couldn't save report", err);
+        res.status(500).json({ error: "Failed to save report" });
+    }
+});
 
 
 

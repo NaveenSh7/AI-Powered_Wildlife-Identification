@@ -8,6 +8,8 @@ import Footer from './Footer.js';
 import Sidebar from './Sidebar.js';
 import Slider from './Slider.js';
 import Profile from './Profile.js';
+import Contact from './Contact.js';
+import About from './About.js';
 
 function App() {
   const location = useLocation();
@@ -29,6 +31,8 @@ function App() {
         <Route exact path='/' element={<Home />} />
         <Route exact path='/Login' element={<Login />} />
         <Route exact path='/Profile' element={<Profile />} />
+        <Route exact path='/Contact' element={<Contact />} />
+        <Route exact path='/About' element={<About />} />
       </Routes>
       <Footer />
     </div>

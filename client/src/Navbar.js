@@ -39,13 +39,11 @@ const Navbar = ()=>{
 			</svg>
 		</div>
 		<div class="text-gray-500 order-3 w-full md:w-auto md:order-2">
-			<ul class="flex font-semibold justify-between">
+			<ul class="flex font-semibold justify-between text-lg">
               
-				<li class="md:px-4 md:py-2 text-white bold"><a href="#">Dashboard</a></li>
-				<li class="md:px-4 md:py-2 hover:text-white text-[#000000] bold"><a href="#">Search</a></li>
-				<li class="md:px-4 md:py-2 hover:text-white text-[#000000] bold"><a href="#">Explore</a></li>
-				<li class="md:px-4 md:py-2 hover:text-white text-[#000000] bold"><a href="#">About</a></li>
-				<li class="md:px-4 md:py-2 hover:text-white text-[#000000] bold"><a href="#">Contact</a></li>
+				<li class="md:px-4 md:py-2 hover:text-white text-[#000000] bold"><a href="/">Search</a></li>
+				<li class="md:px-4 md:py-2 hover:text-white text-[#000000] bold"><a href="/About">About</a></li>
+				<li class="md:px-4 md:py-2 hover:text-white text-[#000000] bold"><a href="/Contact">Contact-me</a></li>
 			</ul>
 		</div>
 		<div class="order-2 md:order-3">

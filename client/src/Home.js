@@ -245,9 +245,9 @@ const TypingEffect = ({ text, speed }) => {
                   {/* second dabba */}
              <div className='flex flex-col '>
                 {/* topbox */}
-                <div className=' w-screen  flex flex-wrap flex-row justify-center gap-16 ml-40'>
+                <div className=' w-screen  flex  flex-row justify-center '>
 
-                     <div className='flex flex-col gap-5 ml-16 mt-2   '>
+                     <div className='flex flex-col gap-5 ml-16 mt-2 w-2/5 items-end '>
                      <button className="relative cursor-pointer h-10 w-36 overflow-hidden border border-black text-green-600 shadow-2xl transition-all duration-200 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:m-auto before:h-0 before:w-0 before:rounded-sm before:bg-green-600 before:duration-300 before:ease-out hover:text-white hover:shadow-green-600 hover:before:h-40 hover:before:w-40 hover:before:opacity-80 rounded-lg" onClick={() => { fetchAnimalInfo(animalName) }} disabled={isModelLoading || !animalName} >
                        <span class="relative z-10"> Get Info</span>
 
@@ -272,18 +272,18 @@ const TypingEffect = ({ text, speed }) => {
 
                  
 
-                     <div className=''>
+                     <div className='w-3/5 flex justify-center items-center'>
                    
-                         <div className="imageHolder mb-4 flex justify-center max-w-80">
+                         <div className="imageHolder mb-4 flex justify-center px-2">
                           {imageURL && (
-                           <img src={imageURL} alt="Upload Preview" ref={imageRef} className=" h-64 rounded-md shadow-lg" />
+                           <img src={imageURL} alt="Upload Preview" ref={imageRef} className="h-72 rounded-md shadow-lg overflow-hidden" />
                          )}
                            </div>
                      </div>
 
 
 
-                            <div className="mainWrapper flex flex-col items-center ">
+                            <div className="mainWrapper flex flex-col w-3/5 items-start ">
                               {results.length > 0 && (
                            <div className="resultsHolder grid grid-rows-1 sm:grid-rows-3 gap-4 ">
                                {results.slice(0, 3).map((result, index) => (
@@ -301,13 +301,9 @@ const TypingEffect = ({ text, speed }) => {
                      </div>
                            </div>
 
-
-                   
-
-                  
+       
 
                 </div>
-
 
 
 
