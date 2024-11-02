@@ -13,6 +13,7 @@ const UserSchema = new mongoose.Schema({
     Url: { type: String, required: true },
     Name: { type: String },
     Data: { type: String },
+    Topic: { type: String },
   }]
 });
 

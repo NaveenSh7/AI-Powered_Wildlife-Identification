@@ -15,12 +15,22 @@ const Home = () => {
     const [animalInfo, setAnimalInfo] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
     const [isSave, setisSave] = useState(false);
+    const [isRepo, setisRepo] = useState(false);
     const imageRef = useRef();
     const textInputRef = useRef();
     const fileInputRef = useRef();
     const [toggle, setToggle] = useState(true);
     const { isAuthenticated, isLoading, user } = useAuth0();
+      
     const PORT = 5000;
+     // report handlling
+const [isPopupOpen, setIsPopupOpen] = useState(false);
+const [formData2, setFormData2] = useState({  topic:'',  Info: '' });
+
+const openPopup = () => setIsPopupOpen(true);
+const closePopup = () => setIsPopupOpen(false);
+ 
+
 
 
     const setTensorFlowBackend = async () => {
@@ -187,6 +197,55 @@ const Home = () => {
         }
     }
 
+ // report handling
+
+
+const handleInputChange = (e) => {
+ const { name, value } = e.target;
+ setFormData2({ ...formData2, [name]: value });
+};
+
+const handleSubmit = (e) => {
+ e.preventDefault();
+
+if (!isAuthenticated) {
+            alert("Please Login to Save ur searches");
+            return;
+        }
+        
+
+ReportImg();
+ console.log(formData2);
+ closePopup(); // Close popup after form submission
+};
+
+const ReportImg = async () => {
+    setisRepo(true);
+    try {
+
+        const formData = new FormData();
+       
+        formData.append("image", selectedFile); // Pass the selected file
+        formData.append("UserEmail", user.email); // User's email
+        formData.append("Info", formData2.Info);
+        formData.append("topic", formData2.topic);
+      
+
+        const response = await axios.put(`http://localhost:${PORT}/ReportImg`, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+        setisSave(false)
+        alert("report succesfully")
+    } catch (err) {
+        console.log("Failed to report image from frontend", err);
+    }
+    setisRepo(false);
+}
+
+
+
 const TypingEffect = ({ text, speed }) => {
     const [displayedText, setDisplayedText] = useState('');
 
@@ -206,6 +265,9 @@ const TypingEffect = ({ text, speed }) => {
 
     return <p className="text-gray-700 leading-relaxed text-lg">{displayedText}</p>;
 };
+
+
+
     return (
 
         <div className="App flex flex-col items-center bg-[#E9EFEC] p-8 min-h-screen">
@@ -259,6 +321,16 @@ const TypingEffect = ({ text, speed }) => {
                           <span class="relative z-10"
                           >Saving...</span>  </button>)
               }
+               {
+                  !isRepo ? (<button className="relative cursor-pointer  h-10 w-36 overflow-hidden border border-black text-green-600 shadow-2xl transition-all duration-200 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:m-auto before:h-0 before:w-0 before:rounded-sm before:bg-green-600 before:duration-300 before:ease-out hover:text-white hover:shadow-green-600 hover:before:h-40 hover:before:w-40 hover:before:opacity-80 rounded-lg" onClick={() => setIsPopupOpen(true)} >
+                      <span class="relative z-10"
+                      > Report</span>  </button>) : (<button className=" relative cursor-pointer h-10 w-36 overflow-hidden border border-black text-green-600 shadow-2xl transition-all duration-200 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:m-auto before:h-0 before:w-0 before:rounded-sm before:bg-green-600 before:duration-300 before:ease-out hover:text-white hover:shadow-green-600 hover:before:h-40 hover:before:w-40 hover:before:opacity-80 rounded-lg"  >
+                          <span class="relative z-10"
+                          >Reporting...</span>  </button>)
+              }
+            
+
+                        
                 <button className="relative cursor-pointer h-10 w-36 overflow-hidden border border-black text-green-600 shadow-2xl transition-all duration-200 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:m-auto before:h-0 before:w-0 before:rounded-sm before:bg-green-600 before:duration-300 before:ease-out hover:text-white hover:shadow-green-600 hover:before:h-40 hover:before:w-40 hover:before:opacity-80 rounded-lg" onClick={() => { 
                           imageRef.current = null;
                         setToggle(true);
@@ -268,6 +340,60 @@ const TypingEffect = ({ text, speed }) => {
 
                           </button>
                      </div>
+
+                     {isPopupOpen && (
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white rounded-lg shadow-lg p-6 max-w-md w-full">
+            <h2 className="text-2xl font-semibold mb-4">Report your finding</h2>
+            <form onSubmit={handleSubmit}>
+            <div className="mb-4">
+                <label className="block text-gray-700 font-bold">Choose the topic:</label>
+                <select
+                  name="topic"
+                  value={formData2.topic}
+                  onChange={handleInputChange}
+                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="" disabled>
+                  Select Option 
+                  </option>
+                  <option value="Option 1">Found a Critically Endangered Specie</option>
+                  <option value="Option 2">Found a Extinct Specie</option>
+                  <option value="Option 3">Wrong Identification</option>
+                  <option value="Option 4">Irrelevant Information</option>
+                  <option value="Option 5">Something Else</option>
+                </select>
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 font-bold">Provide Details:</label>
+                <input
+                  type="text"
+                  name="Info"
+                  value={formData2.info}
+                  onChange={handleInputChange}
+                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+         
+              <div className="flex justify-end space-x-2">
+                <button
+                  type="button"
+                  onClick={closePopup}
+                  className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
+                >
+                  Close
+                </button>
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
                 
 
                  

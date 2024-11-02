@@ -149,7 +149,7 @@ app.put("/SaveImg", upload.single('image'), async (req, res) => {
 //reports
 app.put("/ReportImg", upload.single('image'), async (req, res) => {
     
-    const { UserEmail , Name, Data } = req.body;
+    const { UserEmail , Name, Info , topic} = req.body;
     const image = req.file.path; // This is the uploaded image file path
     
     try {
@@ -159,7 +159,7 @@ app.put("/ReportImg", upload.single('image'), async (req, res) => {
 
         const user = await UserModel.findOneAndUpdate(
             { UserEmail: UserEmail },
-            { $push: { Reports: { Url: result.secure_url, Name: Name, Data : Data } } }, // Save the pair of strings
+            { $push: { Reports: { Url: result.secure_url, Name: Name, Data : Info, Topic:topic } } }, // Save the pair of strings
             { new: true } // Return the updated user
         );
 
