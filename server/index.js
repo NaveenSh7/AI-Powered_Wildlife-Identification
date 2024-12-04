@@ -3,14 +3,15 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const app = express();
 app.use(express.json());
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors({ origin: 'http://localhost:3000', }));
 const { OpenAI } = require('openai');
 //env
 require('dotenv').config();
 const mongoURI = process.env.mongoURI;
 
 //schemas
-const PORT = 5000;
+// const PORT = 5000;
+const PORT = "https://ai-powered-wildlife-identification-backend.vercel.app/";
 const UserModel = require('./models/Users');
 const WildModel = require ('./models/Wildlife');
 const InfoModel = require('./models/Info');
