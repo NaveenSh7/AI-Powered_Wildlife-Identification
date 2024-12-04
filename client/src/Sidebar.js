@@ -8,7 +8,7 @@ const Sidebar = () => {
     <div className="fixed top-96">
       {/* Floating Sidebar */}
       <nav
-        className="z-200 flex absolute top-1/2 left-6 -translate-y-1/2 flex-col justify-around gap-4 p-2.5 bg-white/50 dark:bg-green-800/50 border border-gray-200 dark:border-green-600/60 shadow-lg backdrop-blur-lg rounded-lg min-w-[64px]"
+        className="z-200 flex absolute top-1/2 md:left-6 -translate-y-1/2 flex-col justify-around  md:gap-4 md:p-2.5 bg-white/50 dark:bg-green-800/50 border border-gray-200 dark:border-green-600/60 shadow-lg backdrop-blur-lg rounded-lg min-w-[64px]"
       >
              {/* Settings Link */}
              <a
@@ -39,7 +39,7 @@ const Sidebar = () => {
 
         {/* Analytics Link */}
         <a
-          href="#analytics"
+          href="/Info"
           onClick={() => setSelected('analytics')}
           className={`flex aspect-square min-h-[32px] w-16 flex-col items-center justify-center gap-1 rounded-md p-1.5 ${
             selected === 'analytics'

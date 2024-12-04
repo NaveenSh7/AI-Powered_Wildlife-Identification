@@ -134,6 +134,7 @@ app.put("/SaveImg", upload.single('image'), async (req, res) => {
             { new: true } // Return the updated user
         );
 
+
         if (!user) {
             return res.status(404).json({ error: "User not found" });
         }
@@ -143,6 +144,8 @@ app.put("/SaveImg", upload.single('image'), async (req, res) => {
         console.log("Couldn't save img", err);
         res.status(500).json({ error: "Failed to save image" });
     }
+
+   
 });
 
 
@@ -162,6 +165,19 @@ app.put("/ReportImg", upload.single('image'), async (req, res) => {
             { $push: { Reports: { Url: result.secure_url, Name: Name, Data : Info, Topic:topic } } }, // Save the pair of strings
             { new: true } // Return the updated user
         );
+
+        
+        try {
+            const updatedInfo = await InfoModel.findOneAndUpdate(
+                {}, // no query
+                { $inc: { Reports: 1 } },
+                { upsert: true, new: true }
+            );
+            
+        } catch (err) {
+            console.log(err,"Error incrementing search count");
+           
+        }
 
         if (!user) {
             return res.status(404).json({ error: "User not found" });

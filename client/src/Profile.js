@@ -42,8 +42,15 @@ const Profile = () => {
   }
 
   if (!isAuthenticated) {
-    return <div>Login first</div>;
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <div className="p-6 bg-white rounded-lg shadow-md text-xl font-semibold text-gray-800">
+          Please <span className="text-green-600">login</span> first
+        </div>
+      </div>
+    );
   }
+  
 
 
 

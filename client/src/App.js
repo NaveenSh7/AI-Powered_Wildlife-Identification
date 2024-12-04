@@ -10,7 +10,7 @@ import Slider from './Slider.js';
 import Profile from './Profile.js';
 import Contact from './Contact.js';
 import About from './About.js';
-
+import Info from './Info.js';
 function App() {
   const location = useLocation();
 
@@ -33,6 +33,7 @@ function App() {
         <Route exact path='/Profile' element={<Profile />} />
         <Route exact path='/Contact' element={<Contact />} />
         <Route exact path='/About' element={<About />} />
+        <Route exact path='/Info' element={<Info />} />
       </Routes>
       <Footer />
     </div>

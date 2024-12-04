@@ -248,7 +248,7 @@ const ReportImg = async () => {
 
 const TypingEffect = ({ text, speed }) => {
     const [displayedText, setDisplayedText] = useState('');
-
+  
     useEffect(() => {
         let index = 0;
         const intervalId = setInterval(() => {
@@ -263,6 +263,8 @@ const TypingEffect = ({ text, speed }) => {
         return () => clearInterval(intervalId); // Clean up on unmount
     }, [text, speed]);
 
+
+
     return <p className="text-gray-700 leading-relaxed text-lg">{displayedText}</p>;
 };
 
@@ -271,7 +273,10 @@ const TypingEffect = ({ text, speed }) => {
     return (
 
         <div className="App flex flex-col items-center bg-[#E9EFEC] p-8 min-h-screen">
-            <h1 className="text-4xl font-bold text-gray-800 mb-8">AI-Powered Wildlife Identification</h1>
+  <h1 className="text-3xl ml-16 md:ml-0 sm:text-4xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6 md:mb-8 lg:mb-10">
+  AI-Powered Wildlife Identification
+</h1>
+
             {/* 1 dabba */}
 
             {toggle ? (
@@ -300,16 +305,20 @@ const TypingEffect = ({ text, speed }) => {
 
 {/* <span className="text-gray-600 text-sm">OR</span>
 <input type="text" placeholder="Paste image URL" ref={textInputRef} onChange={handleOnChange} className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-500" /> */}
+
+
 </div>
+
+
 
             ):(<>
 
                   {/* second dabba */}
              <div className='flex flex-col '>
                 {/* topbox */}
-                <div className=' w-screen  flex  flex-row justify-center '>
+                <div className=' w-screen  flex flex-col items-center  lg:flex-row justify-center '>
 
-                     <div className='flex flex-col gap-5 ml-16 mt-2 w-2/5 items-end '>
+                     <div className='flex flex-col gap-5 mb-4 lg:mb-0 lg:ml-16 mt-2 w-2/5 items-end '>
                      <button className="relative cursor-pointer h-10 w-36 overflow-hidden border border-black text-green-600 shadow-2xl transition-all duration-200 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:m-auto before:h-0 before:w-0 before:rounded-sm before:bg-green-600 before:duration-300 before:ease-out hover:text-white hover:shadow-green-600 hover:before:h-40 hover:before:w-40 hover:before:opacity-80 rounded-lg" onClick={() => { fetchAnimalInfo(animalName) }} disabled={isModelLoading || !animalName} >
                        <span class="relative z-10"> Get Info</span>
 
@@ -450,33 +459,8 @@ const TypingEffect = ({ text, speed }) => {
 
 
 
-             
-
-              
-
-
-              
-                    
-                  
-               
-                  
-
-                
-
-
-
-
-
            </>)}
            
-      
-
-            
-             
-            
-           
-
-
         </div>
     );
 };
