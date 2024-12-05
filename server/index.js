@@ -16,7 +16,6 @@ app.options('*', cors(corsOptions));
 
 //for local
 // app.use(cors());
-
 const { OpenAI } = require('openai');
 //env
 require('dotenv').config();
@@ -25,7 +24,6 @@ const mongoURI = process.env.mongoURI;
 //schemas
 const PORT = "https://ai-powered-wildlife-identification.vercel.app/";
 const UserModel = require('./models/Users');
-const WildModel = require ('./models/Wildlife');
 const InfoModel = require('./models/Info');
 const cloudinary = require('./Coudinary');
 
