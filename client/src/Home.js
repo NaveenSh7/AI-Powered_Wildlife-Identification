@@ -292,7 +292,7 @@ const TypingEffect = ({ text, speed }) => {
     <a class="mt-2 text-base leading-normal "
         onClick={triggerUpload}
     > Upload Image</a>
-    <input type="file" accept="image/*" capture="camera" className="hidden" onChange={uploadImage} ref={fileInputRef} />
+    <input type="file" accept="image/*"  className="hidden" onChange={uploadImage} ref={fileInputRef} />
 
 </label>
 <div className="imageHolder mb-4 flex justify-center">
