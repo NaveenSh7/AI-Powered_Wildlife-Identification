@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import { CountUp } from "countup.js";
-
-const PORT = 5000;
+const PORT = "https://ai-powered-wildlife-identification.vercel.app";
 
 const Info = () => {
   const { isLoading } = useAuth0();
@@ -22,7 +21,7 @@ const Info = () => {
   // Fetch information from the server
   const GetInfo = async () => {
     try {
-      const res = await axios.get(`http://localhost:${PORT}/GetInfo`);
+      const res = await axios.get(`${PORT}/GetInfo`);
 
       if (res.data.data1 && res.data.data1.length > 0) {
         const data = res.data.data1[0];

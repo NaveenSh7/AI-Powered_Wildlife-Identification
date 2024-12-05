@@ -23,7 +23,7 @@ const Home = () => {
     const { isAuthenticated, isLoading, user } = useAuth0();
       
     // const PORT = 5000;
-    const PORT = "https://ai-powered-wildlife-identification.vercel.app/";
+    const PORT = "https://ai-powered-wildlife-identification.vercel.app";
      // report handlling
 const [isPopupOpen, setIsPopupOpen] = useState(false);
 const [formData2, setFormData2] = useState({  topic:'',  Info: '' });
@@ -174,7 +174,7 @@ const closePopup = () => setIsPopupOpen(false);
             formData.append("UserEmail", user.email); // User's email
             formData.append("Name", animalName);
 
-            const response = await axios.put(`http://localhost:${PORT}/SaveImg`, formData, {
+            const response = await axios.put(`${PORT}/SaveImg`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
@@ -189,7 +189,7 @@ const closePopup = () => setIsPopupOpen(false);
 
     const IncrSearch = () => {
         try {
-            axios.put(`http://localhost:${PORT}/IncSearch`, {
+            axios.put(`${PORT}/IncSearch`, {
 
             })
         } catch (err) {
@@ -232,7 +232,7 @@ const ReportImg = async () => {
         formData.append("topic", formData2.topic);
       
 
-        const response = await axios.put(`http://localhost:${PORT}/ReportImg`, formData, {
+        const response = await axios.put(`${PORT}/ReportImg`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             },

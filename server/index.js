@@ -16,7 +16,7 @@ require('dotenv').config();
 const mongoURI = process.env.mongoURI;
 
 //schemas
-const PORT = "https://ai-powered-wildlife-identification-git-main-naveensh7s-projects.vercel.app";
+const PORT = "https://ai-powered-wildlife-identification.vercel.app/";
 const UserModel = require('./models/Users');
 const WildModel = require ('./models/Wildlife');
 const InfoModel = require('./models/Info');
