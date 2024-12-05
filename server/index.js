@@ -7,12 +7,13 @@ const cloudinary = require('./Coudinary');
 const app = express();
 app.use(express.json());
 const corsOptions = {
-    origin: 'https://ai-powered-wildlife-identification-kmn5.vercel.app/',
+    origin: process.env.FRONTEND_URL || 'http://localhost:3000',  // Local development fallback
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],
-    optionsSuccessStatus: 200 // For legacy browser support
-  };
+    optionsSuccessStatus: 200
+};
+
 
   app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
@@ -25,19 +26,17 @@ require('dotenv').config();
 const mongoURI = process.env.mongoURI;
 
 //schemas
-const port = "https://ai-powered-wildlife-identification.vercel.app/";
+const port = process.env.PORT || 5000;  // Default to port 5000 if no environment variable is set
+
 
 
 
 
 //connecting to Db
-
-mongoose.connect(  mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+mongoose.connect(mongoURI)
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log('MongoDB Connection Error: ', err));
+
 
 
 app.get('/', async (req, res) => {
