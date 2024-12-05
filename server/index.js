@@ -1,6 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const UserModel = require('./models/Users');
+const InfoModel = require('./models/Info');
+const cloudinary = require('./Coudinary');
 const app = express();
 app.use(express.json());
 const corsOptions = {
@@ -23,9 +26,7 @@ const mongoURI = process.env.mongoURI;
 
 //schemas
 const PORT = "https://ai-powered-wildlife-identification.vercel.app/";
-const UserModel = require('./models/Users.js');
-const InfoModel = require('./models/Info.js');
-const cloudinary = require('./Coudinary');
+
 
 
 
@@ -40,10 +41,9 @@ mongoose.connect(  mongoURI, {
 
 app.use(cors()); 
 
-app.get ( "/" , (req,res)=>{
-    res.send( "Hiii tutu");
-} )
-
+app.get('/', async (req, res) => {
+    res.send("HOLA tutu");
+   });
 
 
 
