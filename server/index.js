@@ -30,7 +30,7 @@ mongoose.connect(  mongoURI, {
 app.use(cors()); 
 
 app.get ( "/" , (req,res)=>{
-    res.send( '<h1>Hiii tutu</h1>');
+    res.send( Hiii tutu);
 } )
 
 
