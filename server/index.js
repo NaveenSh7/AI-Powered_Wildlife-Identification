@@ -3,7 +3,13 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const app = express();
 app.use(express.json());
-app.use(cors({ origin: 'http://localhost:3000', }));
+const corsOptions = {
+    origin: '',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    optionsSuccessStatus: 200 // For legacy browser support
+  };
 const { OpenAI } = require('openai');
 //env
 require('dotenv').config();
@@ -30,7 +36,7 @@ mongoose.connect(  mongoURI, {
 app.use(cors()); 
 
 app.get ( "/" , (req,res)=>{
-    res.send( Hiii tutu);
+    res.send( "Hiii tutu");
 } )
 
 
