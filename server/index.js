@@ -6,8 +6,14 @@ const InfoModel = require('./models/Info');
 const cloudinary = require('./Coudinary');
 const app = express();
 app.use(express.json());
+
+//env
+require('dotenv').config();
+const CSTRING = process.env.CSTRING;
+
+
 const corsOptions = {
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000' || 'https://ai-powered-wildlife-identification.vercel.app/',  // Local development fallback
+    origin: 'https://ai-powered-wildlife-identification.vercel.app/',  // Local development fallback
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],
@@ -21,9 +27,7 @@ app.options('*', cors(corsOptions));
 //for local
 // app.use(cors());
 const { OpenAI } = require('openai');
-//env
-require('dotenv').config();
-const CSTRING = process.env.CSTRING;
+
 
 //schemas
 const port = "https://ai-powered-wildlife-identification.vercel.app/" ;  // Default to port 5000 if no environment variable is set
