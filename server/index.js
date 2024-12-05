@@ -26,7 +26,7 @@ require('dotenv').config();
 const CSTRING = process.env.CSTRING;
 
 //schemas
-const port = process.env.PORT || 5000;  // Default to port 5000 if no environment variable is set
+const port = "https://ai-powered-wildlife-identification.vercel.app/" ;  // Default to port 5000 if no environment variable is set
 
 
 
