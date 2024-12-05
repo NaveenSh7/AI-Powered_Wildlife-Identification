@@ -30,7 +30,7 @@ const { OpenAI } = require('openai');
 
 
 //schemas
-const port = "https://ai-powered-wildlife-identification-canw.vercel.app/" ;  // Default to port 5000 if no environment variable is set
+const port = "https://ai-powered-wildlife-identification.vercel.app" ;  // Default to port 5000 if no environment variable is set
 
 
 
