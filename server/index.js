@@ -7,7 +7,7 @@ const cloudinary = require('./Coudinary');
 const app = express();
 app.use(express.json());
 const corsOptions = {
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',  // Local development fallback
+    origin: process.env.FRONTEND_URL || 'http://localhost:3000' || 'https://ai-powered-wildlife-identification.vercel.app/',  // Local development fallback
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],
