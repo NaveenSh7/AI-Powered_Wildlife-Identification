@@ -23,8 +23,8 @@ const mongoURI = process.env.mongoURI;
 
 //schemas
 const PORT = "https://ai-powered-wildlife-identification.vercel.app/";
-const UserModel = require('./models/Users');
-const InfoModel = require('./models/Info');
+const UserModel = require('./models/Users.js');
+const InfoModel = require('./models/Info.js');
 const cloudinary = require('./Coudinary');
 
 
