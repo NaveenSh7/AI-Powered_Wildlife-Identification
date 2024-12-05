@@ -10,6 +10,13 @@ const corsOptions = {
     allowedHeaders: ['Content-Type', 'Authorization'],
     optionsSuccessStatus: 200 // For legacy browser support
   };
+
+  app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
+
+//for local
+// app.use(cors());
+
 const { OpenAI } = require('openai');
 //env
 require('dotenv').config();
