@@ -23,7 +23,7 @@ app.options('*', cors(corsOptions));
 const { OpenAI } = require('openai');
 //env
 require('dotenv').config();
-const mongoURI = process.env.mongoURI;
+const CSTRING = process.env.CSTRING;
 
 //schemas
 const port = process.env.PORT || 5000;  // Default to port 5000 if no environment variable is set
@@ -33,10 +33,15 @@ const port = process.env.PORT || 5000;  // Default to port 5000 if no environmen
 
 
 //connecting to Db
-mongoose.connect(mongoURI)
+mongoose.connect(CSTRING, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log('MongoDB Connection Error: ', err));
+  
 
+  
 
 
 app.get('/', async (req, res) => {
