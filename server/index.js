@@ -25,7 +25,7 @@ require('dotenv').config();
 const mongoURI = process.env.mongoURI;
 
 //schemas
-const PORT = "https://ai-powered-wildlife-identification.vercel.app/";
+const port = "https://ai-powered-wildlife-identification.vercel.app/";
 
 
 
@@ -39,7 +39,6 @@ mongoose.connect(  mongoURI, {
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log('MongoDB Connection Error: ', err));
 
-app.use(cors()); 
 
 app.get('/', async (req, res) => {
     res.send("HOLA tutu");
@@ -203,11 +202,7 @@ app.put("/ReportImg", upload.single('image'), async (req, res) => {
 
 
 
-
-
-
-
-app.listen(PORT, () => {
+app.listen(port, () => {
     console.log("SERVER STARTED ");
   });
   
