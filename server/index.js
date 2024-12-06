@@ -13,7 +13,7 @@ const CSTRING = process.env.CSTRING;
 
 
 const corsOptions = {
-    origin: 'https://ai-powered-wildlife-identification.vercel.app/',  // Local development fallback
+    origin: 'https://ai-powered-wildlife-identification-kmn5.vercel.app/',  // Local development fallback
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],
@@ -30,7 +30,7 @@ const { OpenAI } = require('openai');
 
 
 //schemas
-const port = "https://ai-powered-wildlife-identification.vercel.app" ;  // Default to port 5000 if no environment variable is set
+const port = process.env.PORT || 5000 ;  // Default to port 5000 if no environment variable is set
 
 
 
