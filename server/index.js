@@ -15,7 +15,17 @@ const CSTRING = process.env.mongoURI;
 
 
 const corsOptions = {
-    origin: 'https://ai-powered-wildlife-identification-kmn5.vercel.app/',  // Local development fallback
+    origin: function (origin, callback) {
+        const allowedOrigins = [
+            'https://ai-powered-wildlife-identification-kmn5.vercel.app/',
+            'http://localhost:3000'
+        ];
+        if (allowedOrigins.includes(origin) || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],
@@ -25,7 +35,7 @@ const corsOptions = {
 
 
 
-  app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
 
 //for local
