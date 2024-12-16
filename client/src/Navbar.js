@@ -4,7 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import axios from 'axios';
 const Navbar = ()=>{
     const { loginWithRedirect,loginWithPopup, isAuthenticated, isLoading, logout, user } = useAuth0();
-	const PORT = 5000;
+	const PORT = "https://ai-powered-wildlife-identification.vercel.app";
 	const Loginfun = async () => {
 		  await loginWithPopup();
 	  
@@ -13,7 +13,7 @@ const Navbar = ()=>{
 
 	  useEffect(() => {
 		if (isAuthenticated && user) {
-		  axios.post(`http://localhost:${PORT}/SaveUser`, {
+		  axios.post(`${PORT}/SaveUser`, {
 			UserEmail: user.email,
 			UserName: user.name,
 		  }).then(response => {

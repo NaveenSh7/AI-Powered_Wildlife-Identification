@@ -1,15 +1,41 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const UserModel = require('./models/Users');
+const InfoModel = require('./models/Info');
+const cloudinary = require('./Coudinary');
 const app = express();
 app.use(express.json());
+
+//env
 app.use(cors({ origin: 'http://localhost:3000', }));
 const { OpenAI } = require('openai');
 
 require('dotenv').config();
-const mongoURI = process.env.mongoURI;
+const CSTRING = process.env.CSTRING;
+
+
+const corsOptions = {
+    origin: 'https://ai-powered-wildlife-identification-kmn5.vercel.app/',  // Local development fallback
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    optionsSuccessStatus: 200
+};
+
+
+  app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
+
+//for local
+// app.use(cors());
+const { OpenAI } = require('openai');
+
 
 //schemas
+const port = process.env.PORT || 5000 ;  // Default to port 5000 if no environment variable is set
+
+
 const PORT = process.env.PORT;
 const UserModel = require('./models/Users');
 const WildModel = require ('./models/Wildlife');
@@ -18,6 +44,8 @@ const cloudinary = require('./Coudinary');
 
 
 
+//connecting to Db
+mongoose.connect(CSTRING, {
 
 
 mongoose.connect(  mongoURI, {
@@ -26,13 +54,14 @@ mongoose.connect(  mongoURI, {
   })
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log('MongoDB Connection Error: ', err));
+  
 
-app.use(cors()); 
+  
 
-app.get ( "/" , (req,res)=>{
-    res.send( '<h1>Hiii tutu</h1>');
-} )
 
+app.get('/', async (req, res) => {
+    res.send("HOLA tutu");
+   });
 
 
 
@@ -192,11 +221,7 @@ app.put("/ReportImg", upload.single('image'), async (req, res) => {
 
 
 
-
-
-
-
-app.listen(PORT, () => {
+app.listen(port, () => {
     console.log("SERVER STARTED ");
   });
   

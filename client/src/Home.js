@@ -22,7 +22,8 @@ const Home = () => {
     const [toggle, setToggle] = useState(true);
     const { isAuthenticated, isLoading, user } = useAuth0();
       
-    const PORT = 5000;
+    // const PORT = 5000;
+    const PORT = "https://ai-powered-wildlife-identification.vercel.app";
      // report handlling
 const [isPopupOpen, setIsPopupOpen] = useState(false);
 const [formData2, setFormData2] = useState({  topic:'',  Info: '' });
@@ -173,7 +174,7 @@ const closePopup = () => setIsPopupOpen(false);
             formData.append("UserEmail", user.email); // User's email
             formData.append("Name", animalName);
 
-            const response = await axios.put(`http://localhost:${PORT}/SaveImg`, formData, {
+            const response = await axios.put(`${PORT}/SaveImg`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
@@ -188,7 +189,7 @@ const closePopup = () => setIsPopupOpen(false);
 
     const IncrSearch = () => {
         try {
-            axios.put(`http://localhost:${PORT}/IncSearch`, {
+            axios.put(`${PORT}/IncSearch`, {
 
             })
         } catch (err) {
@@ -231,7 +232,7 @@ const ReportImg = async () => {
         formData.append("topic", formData2.topic);
       
 
-        const response = await axios.put(`http://localhost:${PORT}/ReportImg`, formData, {
+        const response = await axios.put(`${PORT}/ReportImg`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             },
@@ -291,7 +292,7 @@ const TypingEffect = ({ text, speed }) => {
     <a class="mt-2 text-base leading-normal "
         onClick={triggerUpload}
     > Upload Image</a>
-    <input type="file" accept="image/*" capture="camera" className="hidden" onChange={uploadImage} ref={fileInputRef} />
+    <input type="file" accept="image/*"  className="hidden" onChange={uploadImage} ref={fileInputRef} />
 
 </label>
 <div className="imageHolder mb-4 flex justify-center">
