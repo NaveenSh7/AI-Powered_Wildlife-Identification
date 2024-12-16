@@ -3,7 +3,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const UserModel = require('./models/Users');
 const InfoModel = require('./models/Info');
-const cloudinary = require('./Coudinary');
+const cloudinary = require('./Cloudinary');
 const app = express();
 app.use(express.json());
 
@@ -14,29 +14,14 @@ require('dotenv').config();
 const CSTRING = process.env.mongoURI;
 
 
-const corsOptions = {
-    origin: function (origin, callback) {
-        const allowedOrigins = [
-            'https://ai-powered-wildlife-identification-kmn5.vercel.app/',
-            'http://localhost:3000'
-        ];
-        if (allowedOrigins.includes(origin) || !origin) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
+app.use(cors({
+    origin: ['http://localhost:3000', 'https://ai-powered-wildlife-identification-kmn5.vercel.app'],  // Add both local and production
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],
     optionsSuccessStatus: 200
-};
+}));
 
-
-
-
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
 
 //for local
 // app.use(cors());
