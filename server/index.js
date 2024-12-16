@@ -9,10 +9,9 @@ app.use(express.json());
 
 //env
 app.use(cors({ origin: 'http://localhost:3000', }));
-const { OpenAI } = require('openai');
 
 require('dotenv').config();
-const CSTRING = process.env.CSTRING;
+const CSTRING = process.env.mongoURI;
 
 
 const corsOptions = {
@@ -24,31 +23,26 @@ const corsOptions = {
 };
 
 
+
+
   app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
 
 //for local
 // app.use(cors());
-const { OpenAI } = require('openai');
+
 
 
 //schemas
 const port = process.env.PORT || 5000 ;  // Default to port 5000 if no environment variable is set
 
 
-const PORT = process.env.PORT;
-const UserModel = require('./models/Users');
-const WildModel = require ('./models/Wildlife');
-const InfoModel = require('./models/Info');
-const cloudinary = require('./Coudinary');
 
 
 
-//connecting to Db
-mongoose.connect(CSTRING, {
 
 
-mongoose.connect(  mongoURI, {
+mongoose.connect(  CSTRING, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
