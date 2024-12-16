@@ -5,12 +5,12 @@ const app = express();
 app.use(express.json());
 app.use(cors({ origin: 'http://localhost:3000', }));
 const { OpenAI } = require('openai');
-//env
+
 require('dotenv').config();
 const mongoURI = process.env.mongoURI;
 
 //schemas
-const PORT = 5000;
+const PORT = process.env.PORT;
 const UserModel = require('./models/Users');
 const WildModel = require ('./models/Wildlife');
 const InfoModel = require('./models/Info');
@@ -18,7 +18,7 @@ const cloudinary = require('./Coudinary');
 
 
 
-//connecting to Db
+
 
 mongoose.connect(  mongoURI, {
     useNewUrlParser: true,
