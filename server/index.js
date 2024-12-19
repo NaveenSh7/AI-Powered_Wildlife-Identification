@@ -1,10 +1,11 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const UserModel = require('./models/Users');
-const InfoModel = require('./models/Info');
+const UserModel = require('./Models/Users');
+const InfoModel = require('./Models/Info');
 const cloudinary = require('./Cloudinary');
 const app = express();
+
 app.use(express.json());
 
 //env
