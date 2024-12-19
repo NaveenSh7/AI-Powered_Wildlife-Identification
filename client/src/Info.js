@@ -65,7 +65,8 @@ const Info = () => {
     <div className="p-8 max-w-4xl mx-auto bg-white shadow-2xl rounded-lg my-10">
       <div className="container flex flex-col mx-auto bg-white">
         <div className="flex flex-col items-center gap-16 mx-auto my-32">
-          <div className="flex w-full flex-row justify-center items-center gap-14">
+                    <div className="flex w-full flex-col md:flex-row justify-center items-center gap-14">
+
             {/* Total Users */}
             <div className="flex flex-col items-center p-6 bg-green-100 rounded-lg shadow-md">
               <h3 className="text-5xl font-extrabold leading-tight text-center text-gray-900">
