@@ -41,7 +41,7 @@ const Info = () => {
   useEffect(() => {
     GetInfo();
     
-  }, [isLoading]); // Runs once on mount
+  }, []); // Runs once on mount
 
   useEffect(() => {
     // Trigger CountUp animation after state has been updated with the fetched values
