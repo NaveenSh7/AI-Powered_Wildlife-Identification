@@ -9,6 +9,8 @@ const Profile = () => {
   const [Report, setReport] = useState([]);
   //getting user data
   const limit = 7;
+  const savedRef = useRef(null);
+  const reportsRef = useRef(null);
   const GetUser = async () => {
 
     try {
@@ -28,7 +30,11 @@ const Profile = () => {
     GetUser();
   }, [isAuthenticated]);
 
-
+  // Scroll to a specific section
+  const scrollToSection = (ref) => {
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  };
+  
   if (isLoading) {
     return (
       <div className=" h-96 w-full flex justify-center items-center mb-16 mt-16 ">
@@ -55,13 +61,10 @@ const Profile = () => {
 
 
 
-
   return (
     <>
-      <div className="bg-[#E9EFEC] ">
-
-
-        <div className="pt-8  ">
+      <div className="bg-[#E9EFEC]">
+        <div className="pt-8">
           <div className="w-full lg:w-4/12 px-4 mx-auto">
             <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
               <div className="px-6">
@@ -72,102 +75,114 @@ const Profile = () => {
                         alt="Profile"
                         src={user.picture}
                         className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
-                      >
-                      </img>
+                      />
                     </div>
                   </div>
                   <div className="w-full px-4 text-center mt-16">
                     <div className="flex justify-center py-4 lg:pt-4 pt-8">
-                      <div className="mr-4 p-3 text-center">
+                      <div
+                        className="mr-4 p-3 text-center cursor-pointer"
+                        onClick={() => scrollToSection(savedRef)}
+                      >
                         <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
                           {saved.length}
                         </span>
-                        <span className="text-sm text-blueGray-400">Findings Saved</span>
+                        <span className="text-sm text-blueGray-400">
+                          Findings Saved
+                        </span>
                       </div>
-                      <div className="mr-4 p-3 text-center">
+                      <div
+                        className="mr-4 p-3 text-center cursor-pointer"
+                        onClick={() => scrollToSection(reportsRef)}
+                      >
                         <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
                           {Report.length}
                         </span>
-                        <span className="text-sm text-blueGray-400">Reports Filed</span>
+                        <span className="text-sm text-blueGray-400">
+                          Reports Filed
+                        </span>
                       </div>
                       <div className="lg:mr-4 p-3 text-center">
                         <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
                           0
                         </span>
-                        <span className="text-sm text-blueGray-400">Contribution</span>
+                        <span className="text-sm text-blueGray-400">
+                          Contribution
+                        </span>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="text-center mt-2">
-                  <h3 className="text-xl font-semibold leading-normal  text-blueGray-700 mb-2">
+                  <h3 className="text-xl font-semibold leading-normal text-blueGray-700 mb-2">
                     {user?.name || "Jenna Stones"}
                   </h3>
-
                 </div>
-
               </div>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-row w-screen justify-center space-x-20 ">
-
-          <div className="w-1/3 basis-1/3  bg-blueGray-50  bg-white  shadow-xl">
-
+        <div className="flex flex-col lg:flex-row w-screen justify-center space-x-0 lg:space-x-20">
+          <div
+            ref={savedRef}
+            className="w-full lg:w-1/3 bg-blueGray-50 bg-white shadow-xl mb-8 lg:mb-0"
+          >
             <div className="flex justify-center mb-6 mt-4">
-              <p className="text-base md:text-xl font-medium text-gray-800 m-auto">Saved Findings</p>
+              <p className="text-base md:text-xl font-medium text-gray-800 m-auto">
+                Saved Findings
+              </p>
             </div>
 
-
-            {saved.slice().reverse().map((val, key) => (
-
-              <div key={key} className="shadow hover:shadow-md w-8/12 bg-white rounded-lg overflow-hidden cursor-pointer m-auto mb-8">
+            {saved.map((val, key) => (
+              <div
+                key={key}
+                className="shadow hover:shadow-md w-11/12 lg:w-8/12 bg-white rounded-lg overflow-hidden cursor-pointer m-auto mb-8"
+              >
                 <img
                   className="object-cover w-full h-48"
-                  src={val.Url} // Image URL
+                  src={val.Url}
                   alt="Saved finding"
                 />
                 <div className="relative p-4">
                   <h3 className="text-base md:text-xl font-medium text-gray-800">
-                    {val.Name} {/* Title */}
+                    {val.Name}
                   </h3>
                 </div>
               </div>
             ))}
-
-
-
           </div>
-          <div className="w-1/3 basis-1/3 mb-2 bg-blueGray-50  bg-white  shadow-xl">
-            <div className="flex justify-center mb-6 mt-4">  <p class="text-base md:text-xl font-medium text-gray-800 m-auto"> Reports</p>   </div>
-            {Report.slice().reverse().map((val, key) => (
-              <div class="flex flex-col xl:flex-row shadow hover:shadow-md w-96 m-auto bg-white rounded-lg overflow-hidden cursor-pointer mt-8 mb-8">
-              <img
-                class="object-cover w-1/3 h-48"
-                src={val.Url}
-                alt="Flower and sky"
-              />
 
-              <div class="relative p-4">
-                <h3 class="text-base md:text-xl font-medium text-gray-800">
-                  {val.Topic}
-                </h3>
+          <div
+            ref={reportsRef}
+            className="w-full lg:w-1/3 bg-blueGray-50 bg-white shadow-xl"
+          >
+            <div className="flex justify-center mb-6 mt-4">
+              <p className="text-base md:text-xl font-medium text-gray-800 m-auto">
+                Reports
+              </p>
+            </div>
 
-                <p class="mt-4 text-base md:text-lg text-gray-600">
-                 {val.Data}
-                </p>
+            {Report.map((val, key) => (
+              <div
+                key={key}
+                className="flex flex-col xl:flex-row shadow hover:shadow-md w-11/12 lg:w-96 m-auto bg-white rounded-lg overflow-hidden cursor-pointer mt-8 mb-8"
+              >
+                <img
+                  className="object-cover w-full lg:w-1/3 h-48"
+                  src={val.Url}
+                  alt="Report"
+                />
+                <div className="relative p-4">
+                  <h3 className="text-base md:text-xl font-medium text-gray-800">
+                    {val.Topic}
+                  </h3>
+                  <p className="mt-4 text-base md:text-lg text-gray-600">
+                    {val.Data}
+                  </p>
+                </div>
               </div>
-
-            </div >
-
-))}
-            
-
-
-
-
-
+            ))}
           </div>
         </div>
       </div>
@@ -176,3 +191,4 @@ const Profile = () => {
 };
 
 export default Profile;
+
