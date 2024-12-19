@@ -60,6 +60,15 @@ const Info = () => {
       </div>
     );
   }
+    if (!isAuthenticated) {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <div className="p-6 bg-white rounded-lg shadow-md text-xl font-semibold text-gray-800">
+          Please <span className="text-green-600">login</span> first
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="p-8 max-w-4xl mx-auto bg-white shadow-2xl rounded-lg my-10">
