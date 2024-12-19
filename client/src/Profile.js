@@ -12,7 +12,7 @@ const Profile = () => {
   const GetUser = async () => {
 
     try {
-      const res = await axios.get(`http://localhost:${PORT}/GetUser`, {
+      const res = await axios.get(`${PORT}/GetUser`, {
         params: { UserEmail: user.email } // Pass UserEmail as query parameter
       });
       console.log(res.data.data1.Saved);
