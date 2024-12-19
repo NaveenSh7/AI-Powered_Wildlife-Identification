@@ -364,14 +364,14 @@ const TypingEffect = ({ text, speed }) => {
                   onChange={handleInputChange}
                   className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
-                  <option value="" disabled>
+                 <option value="" disabled>
                   Select Option 
                   </option>
-                  <option value="Option 1">Found a Critically Endangered Specie</option>
-                  <option value="Option 2">Found a Extinct Specie</option>
-                  <option value="Option 3">Wrong Identification</option>
-                  <option value="Option 4">Irrelevant Information</option>
-                  <option value="Option 5">Something Else</option>
+                  <option value="Found a Critically Endangered Specie">Found a Critically Endangered Specie</option>
+                  <option value="Found a Extinct Specie">Found a Extinct Specie</option>
+                  <option value="Wrong Identification">Wrong Identification</option>
+                  <option value="Irrelevant Information">Irrelevant Information</option>
+                  <option value="Something Else">Something Else</option>
                 </select>
               </div>
               <div className="mb-4">
