@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Profile = () => {
-  const PORT = 5000;
+  const PORT = "https://ai-powered-wildlife-identification.onrender.com";
   const { user, isAuthenticated, isLoading } = useAuth0();
   const [saved, setsaved] = useState([]);
   const [Report, setReport] = useState([]);
