@@ -4,7 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import axios from 'axios';
 const Navbar = ()=>{
     const { loginWithRedirect,loginWithPopup, isAuthenticated, isLoading, logout, user } = useAuth0();
-	const PORT = "https://ai-powered-wildlife-identification.vercel.app";
+	const PORT = "http://localhost:5000";
 	const Loginfun = async () => {
 		  await loginWithPopup();
 	  
