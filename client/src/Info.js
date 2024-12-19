@@ -5,7 +5,7 @@ import { CountUp } from "countup.js";
 const PORT = "https://ai-powered-wildlife-identification.onrender.com";
 
 const Info = () => {
-  const { isLoading } = useAuth0();
+  const { isLoading,isAuthenticated } = useAuth0();
 
   const [Users, setUsers] = useState(0);
   const [Searches, setSearches] = useState(0);
