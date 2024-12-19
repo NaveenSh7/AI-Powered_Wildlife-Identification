@@ -17,7 +17,7 @@ const Info = () => {
     new CountUp("countto2", Searches, { duration: 2 }).start();
     new CountUp("countto3", Reports, { duration: 2 }).start();
   };
-GetInfo();
+
   // Fetch information from the server
   const GetInfo = async () => {
     try {
