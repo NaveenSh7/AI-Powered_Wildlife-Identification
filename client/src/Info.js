@@ -48,7 +48,7 @@ const Info = () => {
     if (Users !== 0 || Searches !== 0 || Reports !== 0) {
       animateCounters();
     }
-  }, []); // Runs when any of the counters change
+  }, [isLoading]); // Runs when any of the counters change
 
   if (isLoading) {
     return (
