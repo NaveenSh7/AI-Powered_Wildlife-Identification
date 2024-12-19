@@ -37,10 +37,7 @@ const port = process.env.PORT || 5000 ;  // Default to port 5000 if no environme
 
 
 
-mongoose.connect(  CSTRING, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+mongoose.connect(  CSTRING)
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log('MongoDB Connection Error: ', err));
   
