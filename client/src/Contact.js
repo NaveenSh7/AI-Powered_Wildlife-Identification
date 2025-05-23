@@ -41,7 +41,7 @@ const Contact = () => {
                                     </div>
                                     <a target="blank" className="text-sm ml-3">
                                         <small className="block font-bold">Mail</small>
-                                        Naveensharalayy@gmail.com
+                                        naveensharalayya@gmail.com
                                     </a>
                                 </li>
                             </ul>
